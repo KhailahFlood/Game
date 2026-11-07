@@ -34,11 +34,20 @@ public boolean isHeavy() {
  public void use() {
 	 Game.print("You cant use this item unt unt");
  }
+ public void open( Game game) {
+	 Game.print(" you cant open this boo");
+ }
+ public void close(Game game) {
+	 Game.print("you cant close this item boo");
+ } 
+ public void read(Game game) {
+	 Game.print("you cant read this ite, boo");
+ }
+ }
  
  
  
-  }
- 
+  
  
  
  

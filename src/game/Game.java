@@ -14,6 +14,7 @@ public class Game {
 	static ArrayList<Item> items = new ArrayList<Item>();
 	
 	
+	
 	public static HashMap<String,String> rooms = new HashMap<>();
 	static GameGui gui;
 
@@ -76,7 +77,7 @@ public static void RoomDescriptions() {
 	}
 	private static Room currentRoom;
 	  public static Room getCurrentRoom() {
-		  return currentRoom;
+		  return currentroom;
 	  }
 	  
 	
@@ -282,9 +283,52 @@ public static void runGameGUI(String input) {
             print("look, north, south, east, west, up, down");
             print("go north, take item, i, exit");
             break;
+            
 
         case "exit":
             print("Goodbye, magical adventurer! ♡");
+            break;
+            
+        case "open":
+            if (commands.length > 1) {
+                Item item = findItem(commands[1]);
+
+                if (item != null) {
+                    item.open(null);
+                } else {
+                    print("You don't see that item.");
+                }
+            } else {
+                print("Open what?");
+            }
+            break;
+
+        case "close":
+            if (commands.length > 1) {
+                Item item = findItem(commands[1]);
+
+                if (item != null) {
+                    item.close(null);
+                } else {
+                    print("You don't see that item.");
+                }
+            } else {
+                print("Close what?");
+            }
+            break;
+
+        case "read":
+            if (commands.length > 1) {
+                Item item = findItem(commands[1]);
+
+                if (item != null) {
+                    item.read(null);
+                } else {
+                    print("You don't see that item.");
+                }
+            } else {
+                print("Read what?");
+            }
             break;
 
         default:
@@ -310,6 +354,27 @@ public static void runGameGUI(String input) {
 		}
 	     }
 	
+	public static void addInventoryItem(Item item) {
+		items.add(item);
+	}
+	
+	
+	public static Item findItem(String name) {
+	    Item item = currentroom.getItem(name);
+	    if (item != null) {
+	        return item;
+	    }
+	    for (Item i : items) {
+	        if (i.getName().equalsIgnoreCase(name)) {
+	            return i;
+	     }
+	    }
+
+	    return null;
+	    
+	    
+	    
+	}
 	public static void loadGame() {
 		try {
 			ObjectInputStream in = new ObjectInputStream( new FileInputStream("save0.sav"));
@@ -324,23 +389,10 @@ public static void runGameGUI(String input) {
 			print("Game loaded successfully");
 			print(currentroom);
 		}catch (IOException | ClassNotFoundException e) {
-			print("error " + e.getMessage())
-			;
+			print("error " + e.getMessage());
 			
 			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
+		
 			
 			
 		}

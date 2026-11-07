@@ -48,11 +48,12 @@ public class World {
 		
 		
 		office.setLocked(true);
-		attic.setLocked(true);
+		attic.setLocked(false);
 		garage.setLocked(true);
 		
 		
-		
+		Safe safe = new Safe();
+		attic.addItem(safe);
 		
 
 		
