@@ -177,19 +177,31 @@ public class GameGui extends JFrame {
         setContentPane(mainPanel);
 
         // Submit using the button or Enter
-        submitButton.addActionListener(e -> submitCommand());
-        commandField.addActionListener(e -> submitCommand());
+        submitButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent e) {
+                submitCommand();
+            }
+        });
+
+        commandField.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent e) {
+                submitCommand();
+            }
+        });
 
         setVisible(true);
     }
 
     // Display messages from your game
     public void displayMessage(String message) {
-        SwingUtilities.invokeLater(() -> {
-            storyArea.append(message + "\n\n");
-            storyArea.setCaretPosition(
-                storyArea.getDocument().getLength()
-            );
+        SwingUtilities.invokeLater(new Runnable() {
+            @Override
+            public void run() {
+                storyArea.append(message + "\n\n");
+                storyArea.setCaretPosition(
+                    storyArea.getDocument().getLength()
+                );
+            }
         });
     }
 
@@ -226,6 +238,12 @@ private void submitCommand() {
 
     // Run this class by itself to preview the GUI
 public static void main(String[] args) {
-    SwingUtilities.invokeLater(() -> new GameGui());
-}
+    SwingUtilities.invokeLater(new Runnable() {
+        @Override
+        public void run() {
+            new GameGui();
+            
+        }
+    });
+        }
 }

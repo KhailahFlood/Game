@@ -72,9 +72,21 @@ public class Room implements Serializable {
 	   if (items.containsKey(itemName)) {
 		   items.remove(itemName);
 	   }
+	   
+   }
+   private NPC npc;
+   
+   public void addNPC(NPC npc) {
+	   this.npc = npc;
    }
 
+   public NPC getNPC() {
+	   return npc;
+   }
    
+   public void removeNPC() {
+	   npc = null;
+   }
    
    private boolean locked; 
 	
@@ -85,4 +97,7 @@ public class Room implements Serializable {
 		this.locked = locked;
 	}
  }
+
+
+
 

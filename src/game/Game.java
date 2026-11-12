@@ -9,7 +9,7 @@ import java.util.Scanner;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.util.ArrayList;
-
+import javax.swing.SwingUtilities;
 public class Game {
 	static ArrayList<Item> items = new ArrayList<Item>();
 	
@@ -18,7 +18,12 @@ public class Game {
 	public static HashMap<String,String> rooms = new HashMap<>();
 	static GameGui gui;
 
+	private static Room currentroom;
 
+	public static Room getCurrentRoom() {
+	    return currentroom;
+	}
+	  
 public static void RoomDescriptions() {
     rooms.clear();
 
@@ -75,11 +80,8 @@ public static void RoomDescriptions() {
 		}
 
 	}
-	private static Room currentRoom;
-	  public static Room getCurrentRoom() {
-		  return currentroom;
-	  }
-	  
+	
+
 	
 	public static void print(Object obj) {
 	    if (gui != null) {
@@ -129,21 +131,24 @@ public static void RoomDescriptions() {
 	}
 
 	
-	private static Room currentroom;
 
 public static void main(String[] args) {
     RoomDescriptions();
     currentroom = World.buildWorld();
 
-    javax.swing.SwingUtilities.invokeLater(() -> {
-        gui = new GameGui();
+    javax.swing.SwingUtilities.invokeLater(new Runnable() {
+        public void run() {
+            gui = new GameGui();
 
-        gui.setCommandHandler(command -> {
-            runGameGUI(command);
-        });
+            gui.setCommandHandler(new java.util.function.Consumer<String>() {
+                public void accept(String command) {
+                    runGameGUI(command);
+                }
+            });
 
-        print("♡ Welcome to My Magical Adventure! ♡");
-        print(currentroom);
+            print("♡ Welcome to My Magical Adventure! ♡");
+            print(currentroom);
+        }
     });
 }
 
@@ -194,8 +199,8 @@ public static void main(String[] args) {
 	    	}
 	    }
 	    
-	    input.close();
-	}
+	    input.close();}
+	
 	
 
 public static void runGameGUI(String input) {
@@ -261,8 +266,25 @@ public static void runGameGUI(String input) {
         		Game.print("use whatt?");
         	}
         	break ;
+        	
+        case "talk":
+            if(commands.length > 1) {
+                String npcName = commands[1];
+                NPC npc = currentroom.getNPC();
+
+                if (npc != null && npc.getname().equalsIgnoreCase(npcName)) {
+                    npc.talk();
+                } else {
+                    Game.print("There is no one here by that name");
+                }
+            } else {
+                Game.print("talk to who?");
+            }
+            break;
+    
+  
         		        	   		
-        		        	 
+      		        	 
        
     
         		
@@ -332,9 +354,9 @@ public static void runGameGUI(String input) {
             break;
 
         default:
-            print("I don't know what you mean there babes...");
+            print("I don't know what you mean there babes...");}
     }
-}
+
 
 	public static void saveGame() {
 		try {
@@ -352,7 +374,7 @@ public static void runGameGUI(String input) {
 			print("error "  + e.getMessage());
 			
 		}
-	     }
+	}
 	
 	public static void addInventoryItem(Item item) {
 		items.add(item);
@@ -398,9 +420,8 @@ public static void runGameGUI(String input) {
 		}
 	
 
-}  
+	}}
 	
 	
 	
-}
 
