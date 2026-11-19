@@ -269,7 +269,7 @@ public static void runGameGUI(String input) {
         	
         case "talk":
             if(commands.length > 1) {
-                String npcName = commands[1];
+                String npcName = commands[commands.length - 1];
                 NPC npc = currentroom.getNPC();
 
                 if (npc != null && npc.getname().equalsIgnoreCase(npcName)) {
@@ -280,11 +280,40 @@ public static void runGameGUI(String input) {
             } else {
                 Game.print("talk to who?");
             }
-            break;
-    
+            break; 
+            
+            
+        case "bobo":
+          	 if(commands.length > 1) {
+                String npcName = commands[commands.length - 1];
+                NPC npc = currentroom.getNPC();
+
+                if (npc != null && npc.getname().equalsIgnoreCase(npcName)) {
+                    npc.talk();
+                } else {
+                    Game.print("There is no one here by that name");
+                }
+            }
+          	 break;
+            
+        case "to":
+        	 if(commands.length > 1) {
+                 String npcName = commands[commands.length - 1];
+                 NPC npc = currentroom.getNPC();
+
+                 if (npc != null && npc.getname().equalsIgnoreCase(npcName)) {
+                     npc.talk();
+                 } else {
+                     Game.print("There is no one here by that name");
+                 }
+             } else {
+                 Game.print("talk to who?");
+             }
+             break; 
   
-        		        	   		
-      		        	 
+       	 
+        
+             
        
     
         		

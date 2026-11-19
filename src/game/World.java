@@ -14,6 +14,9 @@ public class World {
 		livingroom.addExit(kitchen, 0);
 		livingroom.addExit(office, 1); 
 		livingroom.addExit(bedroom, 2);
+		Bobo bobo = new Bobo();
+		livingroom.addNPC(bobo);
+		
 
 		kitchen.addExit(livingroom, 1); 
 		kitchen.addExit(garage, 3); 
