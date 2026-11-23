@@ -48,6 +48,8 @@ public class World {
 		kitchen.addItem(mysteriousorb);
 		livingroom.addItem(musicbox);
 		livingroom.addItem(couch);
+		Safe safe = new Safe();
+		attic.addItem(safe);
 		
 		
 		office.setLocked(true);
@@ -55,14 +57,7 @@ public class World {
 		garage.setLocked(true);
 		
 		
-		Safe safe = new Safe();
-		attic.addItem(safe);
-		
-
-		
-		
-		
-		
+	
 		
 		
 		
