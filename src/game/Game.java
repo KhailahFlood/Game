@@ -310,10 +310,42 @@ public static void runGameGUI(String input) {
                  Game.print("talk to who?");
              }
              break; 
-  
-       	 
-        
              
+        case "give":
+            String rest = input.trim().substring(4).trim();
+            int toIndex = rest.toLowerCase().indexOf(" to ");
+
+            if (toIndex == -1) {
+                print("Use: give item to NPC");
+                break;
+            }
+
+            String itemName = rest.substring(0, toIndex).trim();
+            String npcName = rest.substring(toIndex + 4).trim();
+
+            Item givenItem = null;
+
+            for (Item i : items) {
+                if (i.getName().equalsIgnoreCase(itemName)) {
+                    givenItem = i;
+                    break;
+                }
+            }
+
+            if (givenItem == null) {
+                print("You don't have that item.");
+                break;
+            }
+
+            NPC npc = currentroom.getNPC();
+
+            if (npc == null || !npc.getname().equalsIgnoreCase(npcName)) {
+                print("There is nobody here by that name.");
+                break;
+            }
+
+            npc.give(givenItem);
+            break;
        
     
         		
@@ -408,6 +440,10 @@ public static void runGameGUI(String input) {
 	public static void addInventoryItem(Item item) {
 		items.add(item);
 	}
+	public static void removeInventoryItem(Item item) {
+		items.remove(item);
+	}
+	
 	
 	
 	public static Item findItem(String name) {

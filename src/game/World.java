@@ -16,7 +16,8 @@ public class World {
 		livingroom.addExit(bedroom, 2);
 		Bobo bobo = new Bobo();
 		livingroom.addNPC(bobo);
-		
+		Fred fred = new Fred();
+		kitchen.addNPC(fred);
 
 		kitchen.addExit(livingroom, 1); 
 		kitchen.addExit(garage, 3); 
@@ -39,7 +40,7 @@ public class World {
 		Item knife = new Item("Knife", false);
 		Item mysteriousorb = new Item("MysteriousOrb", false);
 		Item couch = new Item("couch" , true);
-		
+		Item money = new Item("money" , false);
 		
 		bedroom.addItem(key);
 		livingroom.addItem(tool);
@@ -50,7 +51,7 @@ public class World {
 		livingroom.addItem(couch);
 		Safe safe = new Safe();
 		attic.addItem(safe);
-		
+		bedroom.addItem(money);
 		
 		office.setLocked(true);
 		attic.setLocked(false);
